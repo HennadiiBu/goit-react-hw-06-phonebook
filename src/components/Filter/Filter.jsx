@@ -1,10 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { findContact } from 'redux/reducer';
+import { getFilter } from 'redux/selectors';
 
 function Filter() {
   const dispatch = useDispatch();
-  const filter = useSelector(state => state.contacts.filter);
+  const filter = useSelector(getFilter);
 
   const handleChange = event => {
     dispatch(findContact(event.target.value.toLowerCase().trim()));

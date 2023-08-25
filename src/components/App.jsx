@@ -5,9 +5,10 @@ import ContactList from './ContactList/ContactList';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors';
 
 function App() {
-  const contacts = useSelector(state => state.contacts.contacts);
+  const contacts = useSelector(getContacts);
 
   return (
     <div>
@@ -18,7 +19,6 @@ function App() {
 
       <ContactList contacts={contacts} />
       <ToastContainer />
-      {localStorage.setItem(`contacts`, JSON.stringify(contacts))}
     </div>
   );
 }
