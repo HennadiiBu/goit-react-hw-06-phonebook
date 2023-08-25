@@ -2,12 +2,12 @@ import React from 'react';
 import style from './ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from 'redux/reducer';
-import { getFilter } from 'redux/selectors';
+import { getContacts, getFilter } from 'redux/selectors';
 
-function ContactList({ contacts }) {
+function ContactList() {
   const dispatch = useDispatch();
   const filter = useSelector(getFilter);
-
+  const contacts = useSelector(getContacts);
   const getVisibleContacts = () => {
     return contacts.filter(({ name }) => name.toLowerCase().includes(filter));
   };
