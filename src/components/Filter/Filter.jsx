@@ -1,29 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { findContact } from 'redux/reducer';
 
-export default class Filter extends Component {
-  state = {
-    name: '',
+function Filter() {
+  const dispatch = useDispatch();
+  const filter = useSelector(state => state.contacts.filter);
+
+  const handleChange = event => {
+    dispatch(findContact(event.target.value.toLowerCase().trim()));
   };
 
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-    this.props.findContact(this.state.name);
-  };
-
-  render() {
-    return (
-      <div>
-        {' '}
-        <p>Find contacts by name</p>
-        <input
-          type="text"
-          name="name"
-          value={this.state.name}
-          onChange={this.handleChange}
-        />
-      </div>
-    );
-  }
+  return (
+    <div>
+      {' '}
+      <p>Find contacts by name</p>
+      <input type="text" name="name" value={filter} onChange={handleChange} />
+    </div>
+  );
 }
+
+export default Filter;

@@ -1,27 +1,33 @@
+import { useDispatch } from 'react-redux';
 import style from './ContactForm.module.css';
 import React, { useState } from 'react';
+import { addNewContact } from 'redux/reducer';
+import { nanoid } from 'nanoid';
 
-function ContactForm({addNewContact}) {
+function ContactForm() {
+  const dispatch = useDispatch();
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const handleChangeName = event => {
-    setName(()=>event.target.value)
+    setName(() => event.target.value);
   };
 
   const handleChangeNumber = event => {
-    setNumber(()=>event.target.value)
+    setNumber(() => event.target.value);
   };
 
   const handleSubmit = event => {
     event.preventDefault();
 
     const newContact = {
+      id: nanoid(),
       name: name,
       number: number,
     };
 
-    addNewContact(newContact);
+    dispatch(addNewContact(newContact));
 
     setName(() => '');
     setNumber(() => '');
